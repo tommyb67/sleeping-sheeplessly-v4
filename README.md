@@ -15,7 +15,7 @@
 - Promotions -> TBD
 - Help desk inquiry -> TBD
 - New product set-ups -> TBD
-- User -> Devise
+x User -> Devise
 - AdminUser -> STI
 
 ## Features
