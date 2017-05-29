@@ -11,7 +11,7 @@
 
 ## Models
 - Banners -> start_date:date, end_date:date, location:text, image:string, headline:text, subcopy:text
-- Devlopment -> TBD
+- Development -> TBD
 - Promotions -> TBD
 - Help desk inquiry -> TBD
 - New product set-ups -> TBD
