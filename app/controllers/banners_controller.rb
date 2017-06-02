@@ -1,4 +1,5 @@
 class BannersController < ApplicationController
+  before_action :set_banner, only: [:show]
 
   def index
   end
@@ -8,15 +9,25 @@ class BannersController < ApplicationController
   end
 
   def create
-    @banner = Banner.new(params.require(:banner).permit(:start_date, :end_date, :location, :headline, :subcopy, :image))
+    @banner = Banner.new(banner_params)
 
-    @banner.save
-
-    redirect_to @banner
+    if @banner.save
+      redirect_to @banner, notice: 'Your banner was created successfully'
+    else
+      render :new
+    end
   end
 
   def show
-    @banner = Banner.find(params[:id])
   end
 
+  private
+
+    def banner_params
+      params.require(:banner).permit(:start_date, :end_date, :location, :headline, :subcopy, :image)
+    end
+
+    def set_banner
+      @banner = Banner.find(params[:id])
+    end
 end
