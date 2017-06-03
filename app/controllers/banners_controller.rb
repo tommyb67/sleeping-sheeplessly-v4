@@ -10,6 +10,7 @@ class BannersController < ApplicationController
 
   def create
     @banner = Banner.new(banner_params)
+    @banner.user_id = current_user.id
 
     if @banner.save
       redirect_to @banner, notice: 'Your banner was created successfully'
