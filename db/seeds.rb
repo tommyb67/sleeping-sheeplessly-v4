@@ -6,9 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+@user = User.create(email: "test@test.com", password: "asdfasdf", password_confirmation: "asdfasdf", first_name: "Bill", last_name: "Bixby")
+puts "1 User created"
 
 10.times do |banner|
-  Banner.create!(start_date: Date.today, end_date: Date.tomorrow, location: "Jumbotron 2", headline: "#{banner} Don't get shorn!", subcopy: "Sheeplessly sleep the night away", image: "D:/sleeping/images")
+  Banner.create!(start_date: Date.today, end_date: Date.tomorrow, location: "Jumbotron 2", headline: "#{banner} Don't get shorn!", subcopy: "Sheeplessly sleep the night away", image: "D:/sleeping/images", user_id: @user.id)
 end
 
 

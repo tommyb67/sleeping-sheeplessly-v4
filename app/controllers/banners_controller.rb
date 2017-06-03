@@ -2,6 +2,7 @@ class BannersController < ApplicationController
   before_action :set_banner, only: [:show]
 
   def index
+    @banners = Banner.all
   end
 
   def new

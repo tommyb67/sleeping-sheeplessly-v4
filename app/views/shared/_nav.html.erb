@@ -4,10 +4,10 @@
 
 
 <ul class="nav nav-tabs">
-  <li class="active">
+  <li class="<%= active?(root_path) %>">
     <%= link_to "Home", root_path %>
   </li>
-  <li>
+  <li class="<%= active?(banners_path) %>">
     <%= link_to "Banners", banners_path %>
   </li>
   <li class="disabled">
