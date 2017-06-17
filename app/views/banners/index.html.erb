@@ -24,27 +24,6 @@
     </tr>
   </thead>
   <tbody>
-    <% @banners.each do |banner| %>
-     <tr>
-       <td>
-         <%= banner.id %>
-       </td>
-       <td>
-         <%= banner.start_date %>
-       </td>
-       <td>
-         <%= banner.end_date %>
-       </td>
-       <td>
-         <%= banner.user.last_name %>
-       </td>
-       <td>
-         <%= banner.location %>
-       </td>
-       <td>
-         <%= truncate(banner.headline) %>
-       </td>
-     </tr>
-    <% end %>
+    <%= render @banners %>
   </tbody>
 </table>
