@@ -28,10 +28,20 @@ describe 'navigate' do
   end
 
   describe 'new' do
-    it 'has a link from the home page' do
-      visit root_path
+    it 'has a link from the index page' do
+      visit banners_path
 
-      click_link("new_banner_from_nav")
+      click_link("new_banner_from_index")
+      expect(page.status_code).to eq(200)
+    end
+  end
+
+  describe 'delete' do
+    it 'can be deleted' do
+      @banner = FactoryGirl.create(:banner)
+      visit banners_path
+
+      click_link("delete_post_#{@banner.id}_from_index")
       expect(page.status_code).to eq(200)
     end
   end

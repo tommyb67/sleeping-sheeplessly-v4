@@ -1,5 +1,5 @@
 class BannersController < ApplicationController
-  before_action :set_banner, only: [:show, :edit, :update]
+  before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   def index
     @banners = Banner.all
@@ -32,6 +32,11 @@ class BannersController < ApplicationController
   end
 
   def show
+  end
+
+  def destroy
+    @banner.delete
+    redirect_to banners_path, notice: 'Your banner was deleted successfully'
   end
 
   private
