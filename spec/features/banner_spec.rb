@@ -60,4 +60,32 @@ describe 'navigate' do
       expect(User.last.banners.last.image).to eq("User Association")
     end
   end
+
+  describe 'edit' do
+    before do
+      @banner = FactoryGirl.create(:banner)
+    end
+
+    it 'can be reached by clicking edit on index page' do
+      banner = FactoryGirl.create(:banner)
+      visit banners_path
+
+      click_link("edit_#{banner.id}")
+      expect(page.status_code).to eq(200)
+    end
+
+    it 'can be edited' do
+      visit edit_banner_path(@banner)
+
+      fill_in 'banner[start_date]', with: Date.today
+      fill_in 'banner[end_date]', with: Date.tomorrow
+      fill_in 'banner[location]', with: "Jumbotron 3"
+      fill_in 'banner[headline]', with: "Edited content"
+      fill_in 'banner[subcopy]', with: "Sheep baby sheep!"
+      fill_in 'banner[image]', with: "User Association"
+      click_on "Save"
+
+      expect(page).to have_content("Edited content")
+    end
+  end
 end
