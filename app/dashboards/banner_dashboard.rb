@@ -8,16 +8,16 @@ class BannerDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    user: Field::BelongsTo,
-    id: Field::Number,
-    start_date: Field::DateTime,
-    end_date: Field::DateTime,
-    location: Field::Text,
-    headline: Field::Text,
-    subcopy: Field::Text,
-    image: Field::String,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    user: Field::BelongsTo.with_options(searchable: false),
+    id: Field::Number.with_options(searchable: false),
+    start_date: Field::DateTime.with_options(searchable: false),
+    end_date: Field::DateTime.with_options(searchable: false),
+    location: Field::Text.with_options(searchable: false),
+    headline: Field::Text.with_options(searchable: true),
+    subcopy: Field::Text.with_options(searchable: true),
+    image: Field::String.with_options(searchable: false),
+    created_at: Field::DateTime.with_options(searchable: false),
+    updated_at: Field::DateTime.with_options(searchable: false),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,6 +30,8 @@ class BannerDashboard < Administrate::BaseDashboard
     :id,
     :start_date,
     :end_date,
+    :headline,
+    :subcopy
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
