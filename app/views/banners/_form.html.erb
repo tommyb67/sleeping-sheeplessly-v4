@@ -36,6 +36,28 @@
     <%= f.text_field :image, class: "form-control" %>
   </div>
 
+  <div class='form-group'>
+
+    <%= f.radio_button :status, 'submitted' %>
+    <%= f.label :status, 'Submitted' %>
+
+    <%= f.radio_button :status, 'assigned' %>
+    <%= f.label :status, 'Assigned' %>
+
+    <%= f.radio_button :status, 'ops_qa' %>
+    <%= f.label :status, 'Ops QA' %>
+
+    <%= f.radio_button :status, 'product_qa' %>
+    <%= f.label :status, 'Product QA' %>
+
+    <%= f.radio_button :status, 'completed' %>
+    <%= f.label :status, 'Completed' %>
+
+    <%= f.radio_button :status, 'rejected' %>
+    <%= f.label :status, 'Rejected' %>
+
+  </div>
+
   <div class="form-group">
     <%= f.submit 'Save', class: "btn btn-primary btn-block" %>
   </div>

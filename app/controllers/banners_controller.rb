@@ -42,7 +42,7 @@ class BannersController < ApplicationController
   private
 
     def banner_params
-      params.require(:banner).permit(:start_date, :end_date, :location, :headline, :subcopy, :image)
+      params.require(:banner).permit(:start_date, :end_date, :location, :headline, :subcopy, :image, :status)
     end
 
     def set_banner
