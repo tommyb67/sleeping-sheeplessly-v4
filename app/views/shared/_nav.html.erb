@@ -2,34 +2,36 @@
   <h1>Sleeping Sheeplessly</h1>
 </div>
 
+<!-- TODO -->
+<% if current_user %>
+  <ul class="nav nav-tabs">
+    <li class="<%= active?(root_path) %>">
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class="<%= active?(banners_path) %>">
+      <%= link_to "Banners", banners_path %>
+    </li>
+    <li class="disabled">
+      <a href="#">Messages</a>
+    </li>
+    <li class="dropdown pull-right">
+       <a href="#" data-toggle="dropdown" class="dropdown-toggle">Options<strong class="caret"></strong></a>
+      <ul class="dropdown-menu">
 
-<ul class="nav nav-tabs">
-  <li class="<%= active?(root_path) %>">
-    <%= link_to "Home", root_path %>
-  </li>
-  <li class="<%= active?(banners_path) %>">
-    <%= link_to "Banners", banners_path %>
-  </li>
-  <li class="disabled">
-    <a href="#">Messages</a>
-  </li>
-  <li class="dropdown pull-right">
-     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Account<strong class="caret"></strong></a>
-    <ul class="dropdown-menu">
-      <li>
-        <%= link_to "TO DO: Admin Dashboard", root_path %>
-      </li>
-      <li>
-        <a href="#">Another action</a>
-      </li>
-      <li>
-        <a href="#">Something else here</a>
-      </li>
-      <li class="divider">
-      </li>
-      <li>
-         <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      </li>
-    </ul>
-  </li>
-</ul>
+        <!-- TODO -->
+        <% if current_user.try(:type) == "AdminUser" %>
+        <li>
+          <%= link_to "Admin Dashboard", admin_root_path %>
+        </li>
+        <li class="divider"></li>
+        <% end %>
+        <!-- TODO -->
+
+        <li>
+           <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+<% end %>
+<!-- TODO -->
