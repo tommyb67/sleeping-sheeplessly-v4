@@ -82,19 +82,13 @@ describe 'navigate' do
 
   describe 'edit' do
     before do
-      @banner = FactoryGirl.create(:banner)
-    end
-
-    it 'can be reached by clicking edit on index page' do
-      banner = FactoryGirl.create(:banner)
-      visit banners_path
-
-      click_link("edit_#{banner.id}")
-      expect(page.status_code).to eq(200)
+      @edit_user = User.create(first_name: 'asdf', last_name: 'asdf', email: 'asdf@asdf.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
+      login_as(@edit_user, :scope => :user)
+      @edit_banner = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @edit_user.id)
     end
 
     it 'can be edited' do
-      visit edit_banner_path(@banner)
+      visit edit_banner_path(@edit_banner)
 
       fill_in 'banner[start_date]', with: Date.today
       fill_in 'banner[end_date]', with: Date.tomorrow
@@ -105,6 +99,16 @@ describe 'navigate' do
       click_on "Save"
 
       expect(page).to have_content("Edited content")
+    end
+
+    it 'cannot be edited by a non authorized user' do
+      logout(:user)
+      non_authorized_user = FactoryGirl.create(:non_authorized_user)
+      login_as(non_authorized_user, :scope => :user)
+
+      visit edit_banner_path(@edit_banner)
+
+      expect(current_path).to eq(root_path)
     end
   end
 end
