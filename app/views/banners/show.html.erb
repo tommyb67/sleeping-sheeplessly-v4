@@ -1,1 +1,35 @@
-<%= @banner.inspect %>
+<div>
+  <h2><span>Headline: </span><%= @banner.headline %></h2>
+</div>
+
+<div>
+  <h3><span>Subcopy: </span><%= @banner.subcopy %></h3>
+</div><br>
+
+<div class='well'>
+  <div>
+    <h4><span>Start Date: </span><%= @banner.start_date %></h4>
+  </div>
+
+  <div>
+    <h4><span>End Date: </span><%= @banner.end_date %></h4>
+  </div>
+
+  <div>
+    <h4><span>Location: </span><%= @banner.location %></h4>
+  </div>
+
+  <div>
+    <h4><span>Status: </span><%= @banner.status %></h4>
+  </div>
+
+  <div>
+    <h4><span>User: </span><%= @banner.user.full_name %></h4>
+  </div>
+
+  <div>
+    <h4><span>Image Path: </span><%= @banner.image %></h4>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_banner_path(@banner), class: 'btn btn-primary' if policy(@banner).update? %>

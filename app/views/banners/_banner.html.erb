@@ -15,7 +15,7 @@
      <%= banner.location %>
    </td>
    <td>
-     <%= truncate(banner.headline) %>
+     <%= link_to truncate(banner.headline), banner %>
    </td>
    <td>
      <%= status_label banner.status %>
