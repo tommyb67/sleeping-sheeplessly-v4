@@ -13,7 +13,7 @@ module BannersHelper
       when 'assigned'
         content_tag(:span, status.titleize, class: 'label label-info')
       when 'ops-qa'
-        content_tag(:span, status.titleize, class: 'label label-warning')
+        content_tag(:span, status.titleize, class: 'label label-primary')
       when 'product-qa'
         content_tag(:span, status.titleize, class: 'label label-primary')
       when 'completed'

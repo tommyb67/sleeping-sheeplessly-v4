@@ -21,7 +21,7 @@
      <%= status_label banner.status %>
    </td>
    <td>
-     <%= link_to 'Edit', edit_banner_path(banner), id: "edit_#{banner.id}" %>
+     <%= link_to 'Edit', edit_banner_path(banner), id: "edit_#{banner.id}" if policy(banner).update? %>
    </td>
    <td>
      <%= link_to 'Delete', banner_path(banner), method: :delete, id: "delete_post_#{banner.id}_from_index", data: {confirm: 'Are you sure' } %>
