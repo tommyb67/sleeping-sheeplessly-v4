@@ -30,9 +30,11 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="banners">
     <%= render @banners %>
   </tbody>
 </table>
 
-<%= paginate @banners %>
+<div id="paginator">
+  <%= paginate @banners, remote: true %>
+</div>

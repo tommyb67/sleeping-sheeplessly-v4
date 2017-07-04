@@ -1,0 +1,2 @@
+$('#banners').html('<%= escape_javascript render(@banners) %>');
+$('#paginator').html('<%= escape_javascript(paginate(@banners, remote: true).to_s) %>');
