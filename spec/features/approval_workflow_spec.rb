@@ -13,8 +13,6 @@ describe 'nagivate' do
     end
 
     it 'has a status that can be edited on the form by an admin' do
-
-
       choose('banner_status_assigned')
       click_on "Save"
 

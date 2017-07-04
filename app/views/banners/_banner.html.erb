@@ -18,6 +18,9 @@
      <%= truncate(banner.headline) %>
    </td>
    <td>
+     <%= banner.status %>
+   </td>
+   <td>
      <%= link_to 'Edit', edit_banner_path(banner), id: "edit_#{banner.id}" %>
    </td>
    <td>

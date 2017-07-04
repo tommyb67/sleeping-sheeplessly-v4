@@ -1,9 +1,14 @@
 require 'rails_helper'
 
 describe 'navigate' do
+  let(:user) { FactoryGirl.create(:user) }
+
+  let(:banner) do
+    Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'headline', subcopy: 'subcopy', image: 'd://images', user_id: user.id)
+  end
+
   before do
-    @user = FactoryGirl.create(:user)
-    login_as(@user, :scope => :user)
+    login_as(user, :scope => :user)
   end
 
   describe 'index' do
@@ -23,15 +28,11 @@ describe 'navigate' do
       banner1 = FactoryGirl.build_stubbed(:banner)
       banner2 = FactoryGirl.build_stubbed(:second_banner)
       visit banners_path
-      expect(page).to have_content(/headline|Other headline/)
+      expect(page).to have_content(/Headline|location/)
     end
 
     it 'has a scope so that only banners creators can see their banners' do
-      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @user.id)
-      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @user.id)
-
       other_user = User.create(first_name: "Non", last_name: "Authorized", email: "nonauth@example.com", password: "asdfasdf", password_confirmation: "asdfasdf")
-
       banner_from_other_user = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'This banner should not be seen', subcopy: 'no schorning', image: 'd://images',user_id: other_user.id)
 
       visit banners_path
@@ -51,13 +52,20 @@ describe 'navigate' do
 
   describe 'delete' do
     it 'can be deleted' do
-      @banner = FactoryGirl.create(:banner)
-      #TODO Refactor
-      @banner.update(user_id: @user.id)
+
+      logout(:user)
+
+      delete_user = FactoryGirl.create(:user)
+      login_as(delete_user, :scope => :user)
+
+      banner_to_delete = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'another headline', subcopy: 'no schorning', image: 'images', user_id: delete_user.id)
+
       visit banners_path
 
-      click_link("delete_post_#{@banner.id}_from_index")
+      click_link("delete_banner_#{banner_to_delete.id}_from_index")
       expect(page.status_code).to eq(200)
+
+
     end
   end
 
@@ -96,14 +104,8 @@ describe 'navigate' do
   end
 
   describe 'edit' do
-    before do
-      @edit_user = User.create(first_name: 'asdf', last_name: 'asdf', email: 'asdf@asdf.com', password: 'asdfasdf', password_confirmation: 'asdfasdf')
-      login_as(@edit_user, :scope => :user)
-      @edit_banner = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @edit_user.id)
-    end
-
     it 'can be edited' do
-      visit edit_banner_path(@edit_banner)
+      visit edit_banner_path(banner)
 
       fill_in 'banner[start_date]', with: Date.today
       fill_in 'banner[end_date]', with: Date.tomorrow
@@ -121,7 +123,7 @@ describe 'navigate' do
       non_authorized_user = FactoryGirl.create(:non_authorized_user)
       login_as(non_authorized_user, :scope => :user)
 
-      visit edit_banner_path(@edit_banner)
+      visit edit_banner_path(banner)
 
       expect(current_path).to eq(root_path)
     end
