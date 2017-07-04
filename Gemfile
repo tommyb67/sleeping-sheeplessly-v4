@@ -36,3 +36,5 @@ gem 'pundit', '~> 1.1'
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+ruby "2.3.3"
