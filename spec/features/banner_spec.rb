@@ -20,10 +20,23 @@ describe 'navigate' do
     end
 
     it 'has a list of banners' do
-      banner1 = FactoryGirl.create(:banner)
-      banner2 = FactoryGirl.create(:second_banner)
+      banner1 = FactoryGirl.build_stubbed(:banner)
+      banner2 = FactoryGirl.build_stubbed(:second_banner)
       visit banners_path
       expect(page).to have_content(/headline|Other headline/)
+    end
+
+    it 'has a scope so that only banners creators can see their banners' do
+      banner1 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @user.id)
+      banner2 = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'Sleep Baby Sleep', subcopy: 'no schorning', image: 'd://images',user_id: @user.id)
+
+      other_user = User.create(first_name: "Non", last_name: "Authorized", email: "nonauth@example.com", password: "asdfasdf", password_confirmation: "asdfasdf")
+
+      banner_from_other_user = Banner.create(start_date: Date.today, end_date: Date.tomorrow, location: 'Jumbotron 2', headline: 'This banner should not be seen', subcopy: 'no schorning', image: 'd://images',user_id: other_user.id)
+
+      visit banners_path
+
+      expect(page).to_not have_content(/This banner should not be seen/)
     end
   end
 
@@ -39,6 +52,8 @@ describe 'navigate' do
   describe 'delete' do
     it 'can be deleted' do
       @banner = FactoryGirl.create(:banner)
+      #TODO Refactor
+      @banner.update(user_id: @user.id)
       visit banners_path
 
       click_link("delete_post_#{@banner.id}_from_index")
