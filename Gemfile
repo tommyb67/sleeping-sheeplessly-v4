@@ -33,5 +33,6 @@ gem "gritter", "1.2.0"
 gem 'administrate', '~> 0.7.0'
 gem 'bourbon'
 gem 'pundit', '~> 1.1'
+gem 'kaminari', '~> 1.0', '>= 1.0.1'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

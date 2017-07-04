@@ -2,7 +2,7 @@ class BannersController < ApplicationController
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   def index
-    @banners = Banner.banners_by current_user
+    @banners = Banner.banners_by(current_user).page(params[:page]).per(10)
   end
 
   def new
