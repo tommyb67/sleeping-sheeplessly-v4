@@ -2,7 +2,7 @@ class BannersController < ApplicationController
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   def index
-    @banners = current_user.banners
+    @banners = Banner.banners_by current_user
   end
 
   def new
