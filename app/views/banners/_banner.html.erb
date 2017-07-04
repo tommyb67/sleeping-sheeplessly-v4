@@ -21,9 +21,9 @@
      <%= status_label banner.status %>
    </td>
    <td>
-     <%= link_to 'Edit', edit_banner_path(banner), id: "edit_#{banner.id}" if policy(banner).update? %>
+     <%= link_to '', edit_banner_path(banner), id: "edit_#{banner.id}", class: 'glyphicon glyphicon-pencil class: index-icons' if policy(banner).update? %>
    </td>
    <td>
-     <%= link_to 'Delete', banner_path(banner), method: :delete, id: "delete_post_#{banner.id}_from_index", data: {confirm: 'Are you sure' } %>
+     <%= link_to '', banner_path(banner), method: :delete, id: "delete_post_#{banner.id}_from_index", class: 'glyphicon glyphicon-trash class: index-icons', data: {confirm: 'Are you sure' } %>
    </td>
  </tr>
