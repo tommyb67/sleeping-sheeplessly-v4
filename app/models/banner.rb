@@ -3,5 +3,7 @@ class Banner < ApplicationRecord
   belongs_to :user, optional: true
   validates_presence_of :start_date, :end_date, :location, :image
 
+  mount_uploader :image, ImageUploader
+
   scope :banners_by, ->(user) { where(user_id: user.id) }
 end

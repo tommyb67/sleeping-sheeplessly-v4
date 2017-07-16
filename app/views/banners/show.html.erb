@@ -28,7 +28,7 @@
   </div>
 
   <div>
-    <h4><span>Image Path: </span><%= @banner.image %></h4>
+    <h4><span>Image: </span><%= image_tag(@banner.image.url(:thumb).to_s) %></h4>
   </div>
 </div>
 

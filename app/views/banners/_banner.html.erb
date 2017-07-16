@@ -18,6 +18,9 @@
      <%= link_to truncate(banner.headline), banner %>
    </td>
    <td>
+     <%= image_tag(banner.image.url(:thumb).to_s) %>
+   </td>
+   <td>
      <%= status_label banner.status %>
    </td>
    <td>
