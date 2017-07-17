@@ -6,12 +6,13 @@
     <% end %>
   <% end %>
 
-  <div class="form-group form-inline">
+
+  <div class="form-group">
     <%= f.label :start_date, class: "col-sm-2 control-label" %>
     <%= f.date_field :start_date, class: "form-control" %>
   </div>
 
-  <div class="form-group form-inline">
+  <div class="form-group">
     <%= f.label :end_date, class: "col-sm-2 control-label" %>
     <%= f.date_field :end_date, class: "form-control" %>
   </div>
@@ -43,3 +44,16 @@
   </div>
 
 <% end %>
+
+
+
+<form class="form-inline" role="form">
+   <div class="form-group">
+      <label for="name">Name</label>
+    <input type="name" class="form-control" id="name" placeholder="Enter name">
+   </div>
+   <div class="form-group">
+      <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="Enter email">
+ </div>
+</form>
